@@ -4,6 +4,11 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    shell: {
+      coverage: {
+        command: './node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec test/**/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js'
+      }
+    },
     mochaTest: {
       test: {
         options: {
@@ -56,8 +61,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'mochaTest']);
-
 };

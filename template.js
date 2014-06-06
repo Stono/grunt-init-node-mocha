@@ -43,6 +43,12 @@ exports.template = function(grunt, init, done) {
     init.prompt('node_version', '>= 0.8.0'),
     init.prompt('main'),
     init.prompt('npm_test', 'grunt mochaTest'),
+     {
+      name: 'coveralls',
+      message: 'Will you use coveralls to report the coverage status?',
+      default: 'Y/n',
+      warning: 'If selected, you must enable Coveralls in https://coveralls.io'
+    },
     {
       name: 'travis',
       message: 'Will this project be tested with Travis CI?',
@@ -59,9 +65,18 @@ exports.template = function(grunt, init, done) {
       'grunt-contrib-jshint': '~0.10.0',
       'grunt-contrib-watch': '~0.5.3',
       'grunt-mocha-test': '~0.11.0',
-      'grunt-notify': '~0.3.0'
+      'grunt-notify': '~0.3.0',
+      'grunt-shell': '~0.7.0'
     };
     props.travis = /y/i.test(props.travis);
+    props.coveralls = /y/i.test(props.coveralls);
+
+    // Add coveralls dependencies if required
+    if(props.coveralls) {
+      props.devDependencies.coveralls = '~2.10.0'
+      props.devDependencies.istanbul = '~0.2.8'
+      props.devDependencies.mocha = '~1.20.1'
+    };
 
     // Files to copy (and process).
     var files = init.filesToCopy(props);

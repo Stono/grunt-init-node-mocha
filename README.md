@@ -5,6 +5,21 @@
 [grunt-init]: http://gruntjs.com/project-scaffolding
 Based on: https://github.com/gruntjs/grunt-init-node
 
+## What it is
+This is a scaffold project which will create an npm module.
+It supports the following:
+  - Travis
+  - Coveralls
+  - Dependency Status
+
+Tests use:
+  - Mocha
+  - Assert
+
+Coverage reports:
+  - Locally blanket
+  - Travis - coveralls
+
 ## Installation
 If you haven't already done so, install [grunt-init][].
 
