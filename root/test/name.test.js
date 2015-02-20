@@ -1,6 +1,5 @@
 'use strict';
 var App    = require('../lib/{%= name %}');
-var assert = require('assert');
 
 describe('{%= name %}', function() {
 
@@ -19,7 +18,7 @@ describe('{%= name %}', function() {
   it('Should be awesome', function(done) {
     var app = new App();
     var result = app.execute();
-    assert.equal(result, 'awesome');
+	result.should.eql('awesome');
     done();
   });
 

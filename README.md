@@ -1,6 +1,5 @@
 # grunt-init-node-mocha
-
-> Create a Node.js module with [grunt-init][], including mocha unit tests and blanket coverage reports.
+This project is a grunt-init project containing istanbul code coverage, html reporting, jshint etc.  This is our standard starting point for all projects.
 
 [grunt-init]: http://gruntjs.com/project-scaffolding
 Based on: https://github.com/gruntjs/grunt-init-node
@@ -14,10 +13,10 @@ It supports the following:
 
 Tests use:
   - Mocha
-  - Assert
+  - Should
 
 Coverage reports:
-  - Locally blanket
+  - Locally - istanbul
   - Travis - coveralls
 
 ## Installation

@@ -1,68 +1,68 @@
 'use strict';
+var config = {
+	targets: {
+		test: ['test/**/*.js'],
+		bin: ['bin/*.js'],
+		src: ['lib/**/*.js', '*.js']
+	},
+	timeout: 5000,
+	require: ['should']
+};
+config.targets.all = config.targets.test.concat(config.targets.bin).concat(config.targets.src);
 
 module.exports = function(grunt) {
+	grunt.initConfig({
+		mochaTest: {
+			test: {
+				options: {
+					reporter: 'spec',
+					timeout: config.timeout,
+					require: config.require
+				},
+				src: config.targets.test 
+			}
+		},
+		/* jshint camelcase:false */
+		mocha_istanbul: {
+			test: {
+				options: {
+					reporter: 'mocha-jenkins-reporter',
+					coverageFolder: 'reports',
+					timeout: config.timeout,
+					require: config.require,
+					reportFormats: ['cobertura', 'lcov', 'html']
+				},
+				src: config.targets.test
+			}
+		},
+		jshint: {
+			options: {
+				jshintrc: '.jshintrc'
+			},
+			stdout: {
+				src: config.targets.all,
+			},
+			checkstyle: {
+				src: config.targets.all,
+				options: {
+					reporter: 'checkstyle',
+					reporterOutput: 'reports/jshint-checkstyle-result.xml'
+				}
+			}
+		},
+		watch: {
+			files: config.targets.all,
+			tasks: ['default']
+		}
+	});
 
-  // Project configuration.
-  grunt.initConfig({
-    shell: {
-      coverage: {
-        command: './node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec test/**/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js'
-      }
-    },
-    mochaTest: {
-      test: {
-        options: {
-          reporter: 'spec'
-        },
-        src: ['test/**/*.js']
-      },
-      coverage: {
-        options: {
-          reporter: 'html-cov',
-          quiet: true,
-          captureFile: 'coverage/coverage.html'
-        },
-        src: ['test/**/*.js']
-      }
-    },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
-      gruntfile: {
-        src: 'Gruntfile.js'
-      },
-      lib: {
-        src: ['lib/**/*.js']
-      },
-      test: {
-        src: ['test/**/*.js']
-      },
-    },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      lib: {
-        files: '<%= jshint.lib.src %>',
-        tasks: ['jshint:lib', 'mochaTest:test']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'mochaTest:test']
-      },
-    },
-  });
+	grunt.loadNpmTasks('grunt-mocha-test');
+	grunt.loadNpmTasks('grunt-mocha-istanbul');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-notify');
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-blanket');
-  grunt.loadNpmTasks('grunt-notify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-shell');
-
-  // Default task.
-  grunt.registerTask('default', ['jshint', 'mochaTest']);
+	// Default task.
+	grunt.registerTask('default', ['jshint:stdout', 'mochaTest']);
+	grunt.registerTask('jenkins', ['jshint', 'mocha_istanbul']);
 };
