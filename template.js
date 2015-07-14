@@ -59,15 +59,15 @@ exports.template = function(grunt, init, done) {
 		props.keywords = [];
 		props.devDependencies = {
 			'grunt': '^0.4.5',
-			'grunt-contrib-jshint': '^0.11.0',
+			'grunt-contrib-jshint': '^0.11.2',
 			'grunt-contrib-watch': '^0.6.1',
-			'grunt-mocha-istanbul': '^2.3.1',
+			'grunt-mocha-istanbul': '^2.4.0',
 			'grunt-mocha-test': '^0.12.7',
 			'grunt-notify': '0.4.1',
-			'istanbul': '^0.3.6',
-			'mocha': '^2.1.0',
-			'mocha-jenkins-reporter': '^0.1.4',
-			'should': '^4.6.5'
+			'istanbul': '^0.3.17',
+			'mocha': '^2.2.5',
+			'mocha-jenkins-reporter': '^0.1.9',
+			'should': '^7.0.2'
 		};
 		props.travis = /y/i.test(props.travis);
 		props.coveralls = /y/i.test(props.coveralls);
