@@ -44,7 +44,6 @@ exports.template = function(grunt, init, done) {
     init.prompt('author_url'),
     init.prompt('node_version', '>= 7.0.0'),
     init.prompt('main'),
-    init.prompt('npm_test', 'grunt mochaTest'),
     {
       name: 'coveralls',
       message: 'Will you use coveralls to report the coverage status?',
@@ -70,6 +69,9 @@ exports.template = function(grunt, init, done) {
       'mocha-jenkins-reporter': '^0.3.7',
       'should': '^11.2.0'
     };
+
+    /* jshint camelcase: false */
+    props.npm_test = './node_modules/grunt/bin/grunt mochaTest';
 
     props.travis = !(/n/i.test(props.travis));
     props.coveralls = !(/n/i.test(props.coveralls));
