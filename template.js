@@ -72,7 +72,6 @@ exports.template = function(grunt, init, done) {
 		props.travis = /y/i.test(props.travis);
 		props.coveralls = /y/i.test(props.coveralls);
 
-console.log(props);
 		// Add coveralls dependencies if required
 		if (props.coveralls) {
 			props.devDependencies.coveralls = '^2.11.16';
