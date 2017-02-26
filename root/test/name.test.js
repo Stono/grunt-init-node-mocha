@@ -1,25 +1,24 @@
 'use strict';
 var App    = require('../lib/{%= name %}');
 
-describe('{%= name %}', function() {
+describe('{%= name %}', () => {
 
-  before(function() {
+  before(() => {
   });
 
-  after(function() {
+  after(() => {
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
   });
 
-  afterEach(function() {
+  afterEach(() => {
   });
 
-  it('Should be awesome', function(done) {
-    var app = new App();
-    var result = app.execute();
-	result.should.eql('awesome');
-    done();
+  it('Should be awesome', () => {
+    let app = new App();
+    let result = app.execute();
+    result.should.eql('awesome');
   });
 
 });

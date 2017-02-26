@@ -8,14 +8,11 @@
 
 'use strict';
 
-var App = function() {
-  var execute = function() {
+module.exports = function() {
+  let self = {};
+  self.execute = function() {
     return 'awesome';
   };
- 
-  return Object.freeze({
-    execute: execute
-  });
-};
 
-module.exports = App;
+  return Object.freeze(self);
+};
