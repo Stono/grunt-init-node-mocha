@@ -11,13 +11,7 @@ coverage/
 *.swp
 *.log
 *.zat
-.idea
+
 checkstyle-result.xml
 coverage.*
 junit.xml
-shippable/
-
-clientid.txt
-clientsecret.txt
-
-.tag*
