@@ -58,24 +58,25 @@ exports.template = function(grunt, init, done) {
 	], function(err, props) {
 		props.keywords = [];
 		props.devDependencies = {
-			'grunt': '^0.4.5',
-			'grunt-contrib-jshint': '^0.11.2',
-			'grunt-contrib-watch': '^0.6.1',
-			'grunt-mocha-istanbul': '^2.4.0',
-			'grunt-mocha-test': '^0.12.7',
-			'grunt-notify': '0.4.1',
-			'istanbul': '^0.3.17',
-			'mocha': '^2.2.5',
-			'mocha-jenkins-reporter': '^0.1.9',
-			'should': '^7.0.2'
+			'grunt': '^1.0.1',
+			'grunt-contrib-jshint': '^1.1.0',
+			'grunt-contrib-watch': '^1.0.0',
+			'grunt-mocha-istanbul': '^5.0.2',
+			'grunt-mocha-test': '^0.13.2',
+			'grunt-notify': '0.4.5',
+			'istanbul': '^0.4.5',
+			'mocha': '^3.2.0',
+			'mocha-jenkins-reporter': '^0.3.7',
+			'should': '^11.2.0'
 		};
 		props.travis = /y/i.test(props.travis);
 		props.coveralls = /y/i.test(props.coveralls);
 
+console.log(props);
 		// Add coveralls dependencies if required
 		if (props.coveralls) {
-			props.devDependencies.coveralls = '~2.11.2'
-		};
+			props.devDependencies.coveralls = '^2.11.16';
+		}
 
 		// Files to copy (and process).
 		var files = init.filesToCopy(props);
