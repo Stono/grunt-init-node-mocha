@@ -93,9 +93,15 @@ exports.template = function(grunt, init, done) {
     // Generate package.json file.
     init.writePackageJSON('package.json', props, function(json) {
       // grunt-init is a bit out of date, we need to mutate the license
-      json.license = json.licenses.map(function(item) {
+      var licenses = json.licenses.map(function(item) {
         return item.type;
-      }).join(' OR ');
+      });
+      if(licenses.length === 1) {
+        json.license = licenses[0];
+      } else {
+        // SPDX license expression syntax version 2.0
+        json.license = '(' + licenses.join(' OR ') + ')';
+      }
       delete json.licenses;
       return json;
     });
