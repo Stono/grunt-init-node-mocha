@@ -91,7 +91,14 @@ exports.template = function(grunt, init, done) {
     init.copyAndProcess(files, props);
 
     // Generate package.json file.
-    init.writePackageJSON('package.json', props);
+    init.writePackageJSON('package.json', props, function(json) {
+      // grunt-init is a bit out of date, we need to mutate the license
+      json.license = json.licenses.map(function(item) {
+        return item.type;
+      }).join(' OR ');
+      delete json.licenses;
+      return json;
+    });
 
     // All done!
     done();
