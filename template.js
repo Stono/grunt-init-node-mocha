@@ -65,9 +65,9 @@ exports.template = function(grunt, init, done) {
       'grunt-mocha-test': '^0.13.2',
       'grunt-notify': '0.4.5',
       'istanbul': '^0.4.5',
-      'mocha': '^3.2.0',
-      'mocha-jenkins-reporter': '^0.3.7',
-      'should': '^11.2.0'
+      'mocha': '^3.5.0',
+      'mocha-jenkins-reporter': '^0.3.8',
+      'should': '^11.2.1'
     };
 
     /* jshint camelcase: false */
